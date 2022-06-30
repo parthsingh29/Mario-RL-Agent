@@ -28,7 +28,8 @@ The simplest (and the oldest) algorithm for estimation optimal Q values for all 
 * Observe the current state s at time step t.
 * Select and perform an action a with the highest Q value for the current state (or pick the random action sometimes — it’s called the ϵ-greedy approach).
 * Observe the next state s’ and the reward r’ at time step t+1.
-* Update the Q-values according to the formula below. Here we estimate Q’ out of the best Q values for the next state, but which action a’ leads to this maximal Q is not quite important:
+* Update the Q-values according to the formula below. Here we estimate Q’ out of the best Q values for the next state, but which action a’ leads to this maximal Q is not quite important
+
 ![image](https://user-images.githubusercontent.com/77194307/176743814-341fc0b8-cc14-4218-a244-19da4be9ea1e.png)
 ---
 Memorization of all the Q values for all state-action pairs is impractical. A much better way is to approximate Q values using a function. This is where the neural network comes into play.
@@ -39,7 +40,7 @@ Experience replay mechanism uses a single replay memory of fixed size where the 
 
 A periodically updated target network means keeping a separate cloned instance of the neural network whose weights are frozen and synced with the leading network only every C step. This network is used to estimate target Q values during training. This mechanism reduces the impact of short-term fluctuations and thus stabilizes the training process.
 
-The loss function for the Deep Q-Network looks like this (where U(D) is a uniform random sampling from the replay memory):
+The loss function for the Deep Q-Network looks like this (where U(D) is a uniform random sampling from the replay memory)
 
 ![image](https://user-images.githubusercontent.com/77194307/176743936-83d0a944-9792-47c3-a94c-13f5bf79c1f4.png)
 ---
@@ -58,4 +59,5 @@ As you can see here, the selection of the action in the argmax is decided by the
 ## Practice
 In the practice section of this article, we will use the first level from the Super Mario Bros. game as an environment. By default, the single observation is a 240 x 256 pixels RGB image, so we need to write a few wrappers to transform it to a grayscale image with a resolution of 84 x 84 pixels. Also, not all observations are useful, so that we will use only every fourth observation and stack them together.
 Now we can create our environment and set the random seeds to the fixed values to get reproducible results. Also, for simplicity, the action space was limited to two actions — moving to the right and a combination of moving to the right and jumping.
+
 ![image](https://user-images.githubusercontent.com/77194307/176744433-1aa5cad4-ccd4-4cfa-b337-928f2ffc08f8.png)
